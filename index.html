@@ -1,0 +1,1002 @@
+<!-- =========================================================
+PART 1/3 — PRIVATE ISLAND EXPERIENCES
+Premium luxury travel website | HTML + CSS + JavaScript
+Copy this part first into index.html.
+========================================================= -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Discover extraordinary private island escapes, secluded villas, turquoise lagoons, bespoke yacht journeys and unforgettable tropical experiences.">
+<meta name="theme-color" content="#073e39">
+<title>ISLE PRIVÉ — Private Island Experiences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   ISLE PRIVÉ — PREMIUM DESIGN SYSTEM
+========================================================= */
+:root{
+  --forest:#073e39;
+  --deep:#062d2a;
+  --ocean:#0b6964;
+  --aqua:#b9e4d8;
+  --sand:#f4f0e7;
+  --cream:#fbfaf6;
+  --gold:#c8a76b;
+  --ink:#172e2b;
+  --muted:#71817a;
+  --white:#fff;
+  --line:rgba(7,62,57,.13);
+  --shadow:0 20px 65px rgba(10,45,40,.11);
+  --serif:"Playfair Display",Georgia,serif;
+  --sans:"DM Sans",Arial,sans-serif;
+  --radius:22px;
+  --container:1240px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.65;overflow-x:hidden}
+body.menu-open{overflow:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+button,input,select,textarea{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+ul{list-style:none}
+::selection{background:var(--aqua);color:var(--deep)}
+.container{width:min(var(--container),calc(100% - 48px));margin-inline:auto}
+.section{padding:112px 0}
+.section-sand{background:var(--sand)}
+.section-dark{background:var(--deep);color:var(--white)}
+.section-heading{max-width:720px;margin-bottom:46px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:2.7px;text-transform:uppercase;color:var(--ocean);margin-bottom:18px}
+.eyebrow:before{content:"";height:1px;width:28px;background:var(--gold)}
+.section-dark .eyebrow{color:var(--aqua)}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.12}
+h2{font-size:clamp(34px,4.2vw,57px);letter-spacing:-1.4px}
+h3{font-size:27px}
+.lead{font-size:16px;color:var(--muted);max-width:640px;line-height:1.9;margin-top:19px}
+.section-dark .lead{color:rgba(255,255,255,.66)}
+.gold{color:var(--gold)}
+.text-center{text-align:center}
+.text-center .section-heading{margin-inline:auto}
+.text-center .lead{margin-inline:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:15px 23px;border:1px solid transparent;background:var(--forest);color:white;font-size:11px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;transition:transform .25s,background .25s,color .25s;min-height:50px}
+.btn:hover{transform:translateY(-3px);background:var(--ocean)}
+.btn-light{background:var(--cream);color:var(--forest)}
+.btn-light:hover{background:var(--aqua);color:var(--deep)}
+.btn-outline{background:transparent;border-color:rgba(255,255,255,.55);color:white}
+.btn-outline:hover{background:white;color:var(--forest)}
+.btn-outline-dark{background:transparent;border-color:var(--line);color:var(--forest)}
+.btn-outline-dark:hover{background:var(--forest);color:white}
+.btn svg{width:15px;height:15px}
+.link-arrow{display:inline-flex;align-items:center;gap:10px;color:var(--forest);font-size:11px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase}
+.link-arrow span{transition:transform .2s}
+.link-arrow:hover span{transform:translateX(5px)}
+/* NAVIGATION */
+.site-header{position:fixed;z-index:1000;top:0;left:0;width:100%;transition:background .3s,box-shadow .3s}
+.site-header.scrolled{background:rgba(251,250,246,.97);backdrop-filter:blur(18px);box-shadow:0 5px 30px rgba(0,0,0,.07)}
+.nav-wrap{width:min(1400px,calc(100% - 64px));margin:auto;height:88px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.brand{display:flex;align-items:center;gap:11px;color:white;flex-shrink:0}
+.scrolled .brand{color:var(--forest)}
+.brand-mark{width:35px;height:35px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-family:var(--serif);font-size:21px}
+.brand-name{font-family:var(--serif);font-size:21px;letter-spacing:2px;line-height:1.1}
+.brand-sub{font-size:8px;letter-spacing:3px;text-transform:uppercase;margin-top:5px;opacity:.75}
+.nav-links{display:flex;align-items:center;gap:27px}
+.nav-links a{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:white;transition:color .2s}
+.scrolled .nav-links a{color:var(--ink)}
+.nav-links a:hover,.scrolled .nav-links a:hover{color:var(--gold)}
+.nav-cta{font-size:10px!important;padding:13px 16px;border:1px solid rgba(255,255,255,.65)}
+.scrolled .nav-cta{border-color:var(--forest)!important;background:var(--forest);color:white!important}
+.menu-toggle{display:none;border:1px solid rgba(255,255,255,.5);background:transparent;color:white;width:45px;height:45px;font-size:24px}
+.scrolled .menu-toggle{color:var(--forest);border-color:var(--line)}
+/* HERO */
+.hero{min-height:790px;height:min(950px,100svh);position:relative;display:flex;align-items:center;color:white;background:#123f3a;isolation:isolate}
+.hero-media{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.hero-media img{object-position:center 52%;animation:heroDrift 22s ease-in-out infinite alternate}
+.hero:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(3,34,31,.77) 0%,rgba(3,34,31,.42) 47%,rgba(3,34,31,.05) 100%),linear-gradient(0deg,rgba(3,34,31,.4),transparent 35%)}
+@keyframes heroDrift{from{transform:scale(1)}to{transform:scale(1.09)}}
+.hero-content{padding-top:95px;max-width:790px}
+.hero .eyebrow{color:#e1c58c}
+.hero h1{font-size:clamp(49px,7.5vw,96px);letter-spacing:-2.8px;line-height:1.01;max-width:850px}
+.hero h1 em{font-weight:400;color:#e2c894}
+.hero-copy{max-width:530px;color:rgba(255,255,255,.82);font-size:16px;line-height:1.9;margin:25px 0 31px}
+.hero-actions{display:flex;gap:13px;flex-wrap:wrap}
+.hero-meta{position:absolute;right:max(32px,calc((100vw - 1400px)/2));bottom:46px;display:flex;gap:32px;color:white}
+.hero-meta strong{display:block;font-family:var(--serif);font-size:27px;font-weight:400}
+.hero-meta span{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;opacity:.78}
+.hero-scroll{position:absolute;left:32px;bottom:42px;writing-mode:vertical-rl;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.8);display:flex;align-items:center;gap:13px}
+.hero-scroll:after{content:"";height:44px;width:1px;background:var(--gold)}
+/* DISCOVERY BAR */
+.discovery{position:relative;z-index:5;margin-top:-1px;background:var(--forest);color:white;padding:27px 0}
+.discovery-grid{display:grid;grid-template-columns:repeat(4,1fr) auto;align-items:center;gap:22px}
+.discovery-field{border-right:1px solid rgba(255,255,255,.18);padding-right:20px}
+.discovery-field label{display:block;font-size:9px;letter-spacing:1.8px;text-transform:uppercase;color:var(--aqua);margin-bottom:6px}
+.discovery-field select,.discovery-field input{background:transparent;color:white;border:0;outline:0;width:100%;font-size:13px;min-height:27px}
+.discovery-field select option{color:var(--ink);background:white}
+.discovery-field input::placeholder{color:rgba(255,255,255,.75)}
+/* INTRO */
+.intro-grid{display:grid;grid-template-columns:1fr .95fr;gap:95px;align-items:center}
+.intro-visual{position:relative;min-height:570px}
+.intro-main-img{position:absolute;inset:0 70px 45px 0}
+.intro-main-img img,.intro-small-img img{border-radius:3px}
+.intro-small-img{position:absolute;right:0;bottom:0;width:47%;height:245px;border:9px solid var(--cream)}
+.intro-stamp{position:absolute;left:-24px;top:35px;background:var(--gold);color:var(--deep);width:106px;height:106px;border-radius:50%;display:grid;place-items:center;text-align:center;font-family:var(--serif);font-size:14px;line-height:1.35;transform:rotate(-10deg)}
+.intro-points{display:grid;grid-template-columns:1fr 1fr;gap:23px;margin-top:32px}
+.intro-point{border-top:1px solid var(--line);padding-top:16px}
+.intro-point strong{display:block;font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:6px}
+.intro-point span{font-size:12px;color:var(--muted)}
+/* DESTINATIONS */
+.destination-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:20px}
+.destination-card{position:relative;height:430px;overflow:hidden;background:#d2dfd5;color:white;isolation:isolate}
+.destination-card.tall{height:490px;margin-top:36px}
+.destination-card img{position:absolute;inset:0;z-index:-2;transition:transform .8s}
+.destination-card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(3,29,27,.8),transparent 65%)}
+.destination-card:hover img{transform:scale(1.07)}
+.destination-info{position:absolute;bottom:26px;left:26px;right:26px}
+.destination-info span{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#e2c894}
+.destination-info h3{margin:9px 0 14px;font-size:29px}
+.destination-info p{font-size:12px;color:rgba(255,255,255,.78);max-width:300px;margin-bottom:15px}
+/* ISLAND COLLECTION */
+.collection-tools{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:30px}
+.filter-list{display:flex;gap:9px;flex-wrap:wrap}
+.filter-btn{padding:10px 15px;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:10px;letter-spacing:.8px;text-transform:uppercase}
+.filter-btn.active,.filter-btn:hover{background:var(--forest);color:white;border-color:var(--forest)}
+.island-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.island-card{background:white;border:1px solid rgba(7,62,57,.07);transition:transform .3s,box-shadow .3s;min-width:0}
+.island-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.island-image{height:260px;position:relative;overflow:hidden;background:#d6e3db}
+.island-image img{transition:transform .7s}
+.island-card:hover .island-image img{transform:scale(1.06)}
+.image-tag{position:absolute;top:17px;left:17px;background:rgba(251,250,246,.94);padding:7px 10px;color:var(--forest);font-size:9px;letter-spacing:1.3px;text-transform:uppercase}
+.heart-btn{position:absolute;right:16px;top:15px;width:38px;height:38px;border:0;border-radius:50%;background:rgba(255,255,255,.93);font-size:19px;color:var(--forest)}
+.heart-btn.saved{color:#bc4b50}
+.island-info{padding:23px}
+.card-location{font-size:10px;color:var(--ocean);text-transform:uppercase;letter-spacing:1.4px}
+.island-info h3{margin:9px 0 10px;font-size:26px}
+.island-info p{font-size:12px;color:var(--muted);line-height:1.8;min-height:45px}
+.card-details{display:flex;justify-content:space-between;gap:10px;padding:17px 0;margin-top:14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:10px;color:var(--muted)}
+.card-price{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:17px}
+.card-price strong{font-family:var(--serif);font-size:21px;font-weight:400}
+.card-price small{font-family:var(--sans);font-size:10px;color:var(--muted)}
+.card-price .link-arrow{font-size:9px}
+/* EXPERIENCE MOSAIC */
+.experience-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;grid-template-rows:245px 245px;gap:16px}
+.experience-tile{position:relative;overflow:hidden;background:#dce7df;color:white;isolation:isolate}
+.experience-tile:first-child{grid-row:span 2}
+.experience-tile img{position:absolute;inset:0;z-index:-2;transition:transform .65s}
+.experience-tile:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(3,34,31,.76),transparent 72%)}
+.experience-tile:hover img{transform:scale(1.07)}
+.experience-tile div{position:absolute;left:23px;right:20px;bottom:22px}
+.experience-tile span{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#e3c992}
+.experience-tile h3{font-size:24px;margin-top:7px}
+.experience-tile p{font-size:11px;color:rgba(255,255,255,.78);margin-top:6px;max-width:340px}
+@media(max-width:1000px){
+ .nav-links{gap:14px}.nav-links a{font-size:9px}.nav-cta{display:none!important}
+ .intro-grid{gap:45px}.destination-grid{grid-template-columns:1fr 1fr}.destination-card.tall{margin-top:0;height:430px}
+ .island-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .discovery-grid{grid-template-columns:repeat(2,1fr)}.discovery-field:nth-child(2){border-right:0}
+ .experience-grid{grid-template-columns:1fr 1fr;grid-template-rows:280px 220px 220px}
+ .experience-tile:first-child{grid-row:span 2}
+}
+@media(max-width:720px){
+ .container{width:calc(100% - 36px)}.section{padding:76px 0}
+ .nav-wrap{height:73px;width:calc(100% - 34px)}.brand-name{font-size:18px}
+ .menu-toggle{display:grid;place-items:center;position:relative;z-index:1002}
+ .nav-links{position:fixed;inset:0;background:var(--deep);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:55px 11%;gap:25px;transform:translateX(100%);transition:transform .3s}
+ .nav-links.open{transform:translateX(0)}
+ .nav-links a{font-family:var(--serif);font-size:27px!important;font-weight:400;color:white!important;text-transform:none;letter-spacing:0}
+ .hero{height:780px;min-height:680px;max-height:100svh}
+ .hero:before{background:linear-gradient(90deg,rgba(3,34,31,.76),rgba(3,34,31,.28)),linear-gradient(0deg,rgba(3,34,31,.45),transparent)}
+ .hero-content{padding-top:50px}.hero h1{font-size:clamp(47px,12vw,72px);letter-spacing:-1.7px}
+ .hero-copy{font-size:14px}.hero-meta{left:22px;right:22px;bottom:25px;gap:22px}
+ .hero-meta strong{font-size:22px}.hero-scroll{display:none}
+ .discovery{padding:25px 0}.discovery-grid{grid-template-columns:1fr 1fr;gap:20px}
+ .discovery-field{border-right:0;border-bottom:1px solid rgba(255,255,255,.17);padding:0 0 13px}
+ .discovery-grid .btn{grid-column:1/-1;width:100%}
+ .intro-grid{grid-template-columns:1fr;gap:38px}.intro-visual{min-height:420px}
+ .intro-main-img{right:48px;bottom:35px}.intro-small-img{height:185px;width:48%;border-width:6px}
+ .intro-stamp{width:82px;height:82px;font-size:11px;left:-6px}
+ .destination-grid{grid-template-columns:1fr;gap:17px}.destination-card,.destination-card.tall{height:390px}
+ .island-grid{grid-template-columns:1fr}.island-image{height:270px}
+ .collection-tools{align-items:flex-start}.experience-grid{grid-template-columns:1fr 1fr;grid-template-rows:320px 205px 205px;gap:10px}
+ .experience-tile:first-child{grid-column:span 2;grid-row:auto}
+ .experience-tile div{left:14px;bottom:15px}.experience-tile h3{font-size:20px}.experience-tile p{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="nav-wrap">
+    <a class="brand" href="#home" aria-label="Isle Privé home">
+      <span class="brand-mark">I</span>
+      <span><span class="brand-name">ISLE PRIVÉ</span><span class="brand-sub">Beyond the ordinary</span></span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+      <a href="#destinations">Destinations</a>
+      <a href="#islands">Private Islands</a>
+      <a href="#experiences">Experiences</a>
+      <a href="#villas">Villas</a>
+      <a href="#journey">Our Philosophy</a>
+      <a href="#contact">Enquire</a>
+    </nav>
+    <a class="btn nav-cta" href="#contact">Plan Your Escape ↗</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<!-- 01. CINEMATIC HERO -->
+<main>
+<section class="hero" id="home">
+  <div class="hero-media">
+    <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=2200&q=90" alt="Tropical island paradise surrounded by brilliant turquoise ocean" fetchpriority="high">
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <span class="eyebrow">A world of your own</span>
+      <h1>Somewhere<br>between <em>dream</em><br>and paradise.</h1>
+      <p class="hero-copy">Discover secluded islands, extraordinary hideaways and the rare luxury of having the world's most beautiful places all to yourself.</p>
+      <div class="hero-actions">
+        <a href="#destinations" class="btn btn-light">Explore our islands <span>↗</span></a>
+        <a href="#experiences" class="btn btn-outline">Discover experiences <span>↗</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll to discover</div>
+  <div class="hero-meta">
+    <div><strong>01 / ∞</strong><span>Your own horizon</span></div>
+    <div><strong>100%</strong><span>Made around you</span></div>
+    <div><strong>Beyond</strong><span>Every expectation</span></div>
+  </div>
+</section>
+
+<!-- 02. TRIP DISCOVERY -->
+<section class="discovery" aria-label="Discover an island">
+  <div class="container">
+    <form class="discovery-grid" id="discoveryForm">
+      <div class="discovery-field">
+        <label for="regionSelect">Your destination</label>
+        <select id="regionSelect">
+          <option value="all">Anywhere in paradise</option>
+          <option value="Indian Ocean">Indian Ocean</option>
+          <option value="South Pacific">South Pacific</option>
+          <option value="Caribbean">Caribbean</option>
+          <option value="Southeast Asia">Southeast Asia</option>
+        </select>
+      </div>
+      <div class="discovery-field">
+        <label for="arrivalDate">Arrival date</label>
+        <input type="date" id="arrivalDate" aria-label="Preferred arrival date">
+      </div>
+      <div class="discovery-field">
+        <label for="guestCount">Travelling with</label>
+        <select id="guestCount">
+          <option>2 guests</option><option>1 guest</option><option>3–4 guests</option>
+          <option>5–8 guests</option><option>9+ guests</option>
+        </select>
+      </div>
+      <div class="discovery-field">
+        <label for="tripStyle">Escape style</label>
+        <select id="tripStyle">
+          <option value="all">Surprise me</option>
+          <option>Romantic retreat</option><option>Family adventure</option>
+          <option>Wellness & renewal</option><option>Yacht & ocean</option>
+          <option>Celebration</option>
+        </select>
+      </div>
+      <button class="btn btn-light" type="submit">Find my island ↗</button>
+    </form>
+  </div>
+</section>
+
+<!-- 03. BRAND INTRODUCTION -->
+<section class="section" id="journey">
+  <div class="container intro-grid">
+    <div class="intro-visual">
+      <div class="intro-main-img"><img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1100&q=85" alt="Luxury island resort pool opening toward the ocean" loading="lazy"></div>
+      <div class="intro-small-img"><img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=700&q=85" alt="Overwater villas surrounded by clear tropical water" loading="lazy"></div>
+      <div class="intro-stamp">The art of<br>getting<br>away</div>
+    </div>
+    <div>
+      <span class="eyebrow">Travel differently</span>
+      <h2>Not just a destination.<br><span class="gold">A feeling.</span></h2>
+      <p class="lead">Imagine a place where the shoreline belongs to you, mornings begin without an agenda, and every detail feels as though it was created just for you.</p>
+      <p class="lead">ISLE PRIVÉ brings together exceptional island escapes and thoughtfully curated experiences. From barefoot simplicity to remarkable private estates, your journey begins with what matters most to you.</p>
+      <div class="intro-points">
+        <div class="intro-point"><strong>Entirely personal</strong><span>Journeys shaped around you</span></div>
+        <div class="intro-point"><strong>Remarkably secluded</strong><span>Space to truly disconnect</span></div>
+        <div class="intro-point"><strong>Locally inspired</strong><span>Authentic island encounters</span></div>
+        <div class="intro-point"><strong>Thoughtfully curated</strong><span>Details considered, always</span></div>
+      </div>
+      <a class="link-arrow" href="#experiences" style="margin-top:31px">Discover our philosophy <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 04. DESTINATIONS -->
+<section class="section section-sand" id="destinations">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">The world's extraordinary corners</span>
+      <h2>Find your kind<br>of <span class="gold">somewhere.</span></h2>
+      <p class="lead">From Indian Ocean lagoons to hidden Caribbean coves, each region offers its own rhythm, colour and sense of wonder.</p>
+    </div>
+    <div class="destination-grid">
+      <article class="destination-card tall">
+        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1100&q=85" alt="Indian Ocean tropical lagoon and island villas" loading="lazy">
+        <div class="destination-info"><span>01 / Ocean dreams</span><h3>Indian Ocean</h3><p>Glass-clear lagoons, coral gardens and villas floating above the sea.</p><a href="#islands" class="link-arrow" style="color:white">Explore the region <span>→</span></a></div>
+      </article>
+      <article class="destination-card">
+        <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1000&q=85" alt="Powerful tropical ocean waves meeting a pristine shore" loading="lazy">
+        <div class="destination-info"><span>02 / Wild beauty</span><h3>South Pacific</h3><p>Emerald peaks, volcanic shores and faraway horizons.</p><a href="#islands" class="link-arrow" style="color:white">Explore the region <span>→</span></a></div>
+      </article>
+      <article class="destination-card tall">
+        <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1000&q=85" alt="Mediterranean-style island architecture beside brilliant blue water" loading="lazy">
+        <div class="destination-info"><span>03 / Coastal elegance</span><h3>Caribbean</h3><p>Sun-washed beaches, lively island culture and quiet turquoise bays.</p><a href="#islands" class="link-arrow" style="color:white">Explore the region <span>→</span></a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 05. PRIVATE ISLAND COLLECTION -->
+<section class="section" id="islands">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">The private island collection</span>
+      <h2>Extraordinary places.<br><span class="gold">Unforgettable stays.</span></h2>
+      <p class="lead">Explore a sample collection of island-inspired escapes. Properties and prices shown here are illustrative concepts, not live availability or confirmed offers.</p>
+    </div>
+    <div class="collection-tools">
+      <div class="filter-list" aria-label="Filter islands">
+        <button class="filter-btn active" data-region="all">All escapes</button>
+        <button class="filter-btn" data-region="Indian Ocean">Indian Ocean</button>
+        <button class="filter-btn" data-region="South Pacific">South Pacific</button>
+        <button class="filter-btn" data-region="Caribbean">Caribbean</button>
+      </div>
+      <label style="display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted)" for="islandSearch">Search <input id="islandSearch" type="search" placeholder="Island or experience..." style="padding:10px 12px;border:1px solid var(--line);background:white;width:210px;max-width:55vw;outline-color:var(--ocean)"></label>
+    </div>
+    <div class="island-grid" id="islandGrid">
+      <article class="island-card" data-region="Indian Ocean" data-search="azure atoll maldives lagoon romance diving">
+        <div class="island-image"><img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=85" alt="Overwater villa and turquoise lagoon at Azure Atoll" loading="lazy"><span class="image-tag">Ocean sanctuary</span><button class="heart-btn" aria-label="Save Azure Atoll" aria-pressed="false">♡</button></div>
+        <div class="island-info"><div class="card-location">Indian Ocean · Maldives-inspired</div><h3>Azure Atoll</h3><p>A dreamy hideaway of overwater living, private decks and luminous blue horizons.</p><div class="card-details"><span>⌂ Overwater villa</span><span>◉ Lagoon access</span></div><div class="card-price"><div><strong>From $1,850</strong><small> / night · sample</small></div><a class="link-arrow" href="#contact">Enquire <span>→</span></a></div></div>
+      </article>
+      <article class="island-card" data-region="South Pacific" data-search="emerald cove fiji rainforest snorkeling nature">
+        <div class="island-image"><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=85" alt="Lush tropical coastline and rolling ocean at Emerald Cove" loading="lazy"><span class="image-tag">Nature retreat</span><button class="heart-btn" aria-label="Save Emerald Cove" aria-pressed="false">♡</button></div>
+        <div class="island-info"><div class="card-location">South Pacific · Fiji-inspired</div><h3>Emerald Cove</h3><p>Rainforest trails, hidden beaches and slow days surrounded by nature.</p><div class="card-details"><span>⌂ Beach residence</span><span>◉ Nature trails</span></div><div class="card-price"><div><strong>From $2,200</strong><small> / night · sample</small></div><a class="link-arrow" href="#contact">Enquire <span>→</span></a></div></div>
+      </article>
+      <article class="island-card" data-region="Caribbean" data-search="coral house caribbean family beach sailing">
+        <div class="island-image"><img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=900&q=85" alt="Sunny Caribbean-inspired coast with clear water at Coral House" loading="lazy"><span class="image-tag">Barefoot elegance</span><button class="heart-btn" aria-label="Save Coral House" aria-pressed="false">♡</button></div>
+        <div class="island-info"><div class="card-location">Caribbean · Coastal escape</div><h3>Coral House</h3><p>Sunlit terraces, warm island hospitality and calm, family-friendly shores.</p><div class="card-details"><span>⌂ Private estate</span><span>◉ Beach access</span></div><div class="card-price"><div><strong>From $1,450</strong><small> / night · sample</small></div><a class="link-arrow" href="#contact">Enquire <span>→</span></a></div></div>
+      </article>
+      <article class="island-card" data-region="Indian Ocean" data-search="palm sanctuary seychelles wellness spa tropical">
+        <div class="island-image"><img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=900&q=85" alt="Private tropical pool and palm-fringed resort at Palm Sanctuary" loading="lazy"><span class="image-tag">Wellness hideaway</span><button class="heart-btn" aria-label="Save Palm Sanctuary" aria-pressed="false">♡</button></div>
+        <div class="island-info"><div class="card-location">Indian Ocean · Island wellness</div><h3>Palm Sanctuary</h3><p>A restorative retreat for spa rituals, mindful mornings and unhurried afternoons.</p><div class="card-details"><span>⌂ Garden villa</span><span>◉ Wellness rituals</span></div><div class="card-price"><div><strong>From $1,600</strong><small> / night · sample</small></div><a class="link-arrow" href="#contact">Enquire <span>→</span></a></div></div>
+      </article>
+      <article class="island-card" data-region="South Pacific" data-search="blue horizon tahiti sunset yacht adventure">
+        <div class="island-image"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85" alt="Golden tropical beach and deep blue sea at Blue Horizon" loading="lazy"><span class="image-tag">Ocean adventure</span><button class="heart-btn" aria-label="Save Blue Horizon" aria-pressed="false">♡</button></div>
+        <div class="island-info"><div class="card-location">South Pacific · Ocean escape</div><h3>Blue Horizon</h3><p>Days shaped by sailing, secluded coves and sunset picnics beside the sea.</p><div class="card-details"><span>⌂ Island lodge</span><span>◉ Sailing outings</span></div><div class="card-price"><div><strong>From $1,950</strong><small> / night · sample</small></div><a class="link-arrow" href="#contact">Enquire <span>→</span></a></div></div>
+      </article>
+      <article class="island-card" data-region="Caribbean" data-search="silver palm cove luxury villa private chef celebration">
+        <div class="island-image"><img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=900&q=85" alt="Sunlit palm-lined island shore at Silver Palm Cove" loading="lazy"><span class="image-tag">Celebration estate</span><button class="heart-btn" aria-label="Save Silver Palm Cove" aria-pressed="false">♡</button></div>
+        <div class="island-info"><div class="card-location">Caribbean · Private villa</div><h3>Silver Palm Cove</h3><p>An intimate setting for milestone celebrations, private dining and shared memories.</p><div class="card-details"><span>⌂ Multi-bedroom villa</span><span>◉ Private dining</span></div><div class="card-price"><div><strong>From $2,750</strong><small> / night · sample</small></div><a class="link-arrow" href="#contact">Enquire <span>→</span></a></div></div>
+      </article>
+    </div>
+    <p id="noIslands" hidden style="padding:40px;text-align:center;color:var(--muted)">No matching escapes. Try another destination or search term.</p>
+    <div class="text-center" style="margin-top:38px"><a href="#contact" class="btn">Request a bespoke shortlist ↗</a></div>
+  </div>
+</section>
+
+<!-- 06. SIGNATURE EXPERIENCES -->
+<section class="section section-dark" id="experiences">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Made for your kind of paradise</span>
+      <h2>More than a stay.<br><span class="gold">A collection of moments.</span></h2>
+      <p class="lead">Follow the tide, discover a new horizon or simply enjoy the pleasure of having nowhere else to be.</p>
+    </div>
+    <div class="experience-grid">
+      <article class="experience-tile"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=85" alt="Ocean adventure and snorkeling in clear tropical water" loading="lazy"><div><span>01 / Beneath the surface</span><h3>Ocean adventures</h3><p>Explore coral gardens, paddle quiet lagoons and discover the underwater world.</p></div></article>
+      <article class="experience-tile"><img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=700&q=85" alt="Beautifully prepared fine dining experience" loading="lazy"><div><span>02 / Taste</span><h3>Private dining</h3><p>Thoughtful menus inspired by local flavours.</p></div></article>
+      <article class="experience-tile"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=700&q=85" alt="Peaceful spa and wellness retreat" loading="lazy"><div><span>03 / Restore</span><h3>Island wellness</h3><p>Find your rhythm through restorative rituals.</p></div></article>
+      <article class="experience-tile"><img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=700&q=85" alt="Beautiful island coastline at golden hour" loading="lazy"><div><span>04 / Discover</span><h3>Hidden shores</h3><p>Seek out quiet beaches and secret coves.</p></div></article>
+      <article class="experience-tile"><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=700&q=85" alt="Blue ocean and tropical waves for sailing and water sports" loading="lazy"><div><span>05 / Set sail</span><h3>Yacht escapes</h3><p>Explore the coast at your own pace.</p></div></article>
+    </div>
+  </div>
+</section><!-- =========================================================
+PART 2/3 — CONTINUE DIRECTLY AFTER PART 1
+========================================================= -->
+
+<!-- 07. PRIVATE VILLA COLLECTION -->
+<section class="section" id="villas">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Your private sanctuary</span>
+      <h2>Stay somewhere<br><span class="gold">extraordinary.</span></h2>
+      <p class="lead">Discover the beauty of space, considered design and indoor-outdoor living in these villa-inspired concepts.</p>
+    </div>
+    <div class="destination-grid">
+      <article class="destination-card">
+        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=900&q=85" alt="Contemporary luxury villa with private pool" loading="lazy">
+        <div class="destination-info"><span>01 / Contemporary</span><h3>The Ocean Residence</h3><p>Open architecture, expansive terraces and uninterrupted sea views.</p><a href="#contact" class="link-arrow" style="color:white">Explore residence →</a></div>
+      </article>
+      <article class="destination-card">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85" alt="Elegant modern villa interior with warm natural materials" loading="lazy">
+        <div class="destination-info"><span>02 / Understated luxury</span><h3>The Garden Villa</h3><p>Natural textures, lush greenery and peaceful private courtyards.</p><a href="#contact" class="link-arrow" style="color:white">Explore residence →</a></div>
+      </article>
+      <article class="destination-card">
+        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=900&q=85" alt="Architectural island-inspired villa with an infinity pool" loading="lazy">
+        <div class="destination-info"><span>03 / Grand escapes</span><h3>The Estate Collection</h3><p>Generous spaces for families, friends and meaningful celebrations.</p><a href="#contact" class="link-arrow" style="color:white">Explore residence →</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 08. THE ISLAND LIFESTYLE -->
+<section class="section section-sand">
+  <div class="container">
+    <div class="intro-grid">
+      <div>
+        <span class="eyebrow">The island state of mind</span>
+        <h2>Let the world<br>wait a <span class="gold">little longer.</span></h2>
+        <p class="lead">Some luxuries cannot be measured in square metres or thread counts. They are the sound of the sea at dawn, the first light over the water and an afternoon with absolutely no plans.</p>
+        <div style="display:grid;gap:22px;margin-top:32px">
+          <div class="intro-point"><strong>Slow mornings</strong><span>Breakfast on your terrace, a swim before the world wakes.</span></div>
+          <div class="intro-point"><strong>Days without schedules</strong><span>Follow the sunshine instead of the clock.</span></div>
+          <div class="intro-point"><strong>Evenings to remember</strong><span>Lantern-lit dinners, open skies and conversations that linger.</span></div>
+        </div>
+        <a href="#contact" class="btn" style="margin-top:32px">Create your escape ↗</a>
+      </div>
+      <div style="height:560px;position:relative">
+        <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1100&q=85" alt="Peaceful tropical beach with palm trees and soft morning light" loading="lazy" style="position:absolute;inset:0">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09. A DAY IN PARADISE -->
+<section class="section">
+  <div class="container">
+    <div class="section-heading text-center">
+      <span class="eyebrow">A day, entirely your own</span>
+      <h2>From first light<br>to <span class="gold">starlight.</span></h2>
+      <p class="lead">A little inspiration for a day on island time. Every itinerary can be adjusted around your interests.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px" class="day-grid">
+      <article><img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=600&q=80" alt="Golden sunrise over a peaceful landscape" loading="lazy" style="height:210px;margin-bottom:22px"><span class="eyebrow">06:30 · Morning</span><h3>First light</h3><p class="lead" style="font-size:13px;margin-top:10px">Wake with the sun, take a quiet swim and enjoy coffee by the shore.</p></article>
+      <article><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Clear blue water ready for a morning snorkeling trip" loading="lazy" style="height:210px;margin-bottom:22px"><span class="eyebrow">10:00 · Explore</span><h3>Blue adventures</h3><p class="lead" style="font-size:13px;margin-top:10px">Discover a reef, paddle along the coast or sail to a quiet cove.</p></article>
+      <article><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&q=80" alt="Relaxing wellness treatment in a tranquil spa" loading="lazy" style="height:210px;margin-bottom:22px"><span class="eyebrow">14:00 · Unwind</span><h3>Time to restore</h3><p class="lead" style="font-size:13px;margin-top:10px">Enjoy a restorative treatment, a book in the shade or a long lunch.</p></article>
+      <article><img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=600&q=80" alt="An intimate fine dining table set for an elegant evening" loading="lazy" style="height:210px;margin-bottom:22px"><span class="eyebrow">19:00 · Evening</span><h3>Under the stars</h3><p class="lead" style="font-size:13px;margin-top:10px">Settle into a private dinner as the sky turns gold and the stars appear.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- 10. YACHT AND SAILING -->
+<section class="section section-dark" id="yachting">
+  <div class="container intro-grid">
+    <div style="height:520px;position:relative">
+      <img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=1100&q=85" alt="Luxury yacht cruising across the open sea" loading="lazy" style="position:absolute;inset:0">
+    </div>
+    <div>
+      <span class="eyebrow">Beyond the shoreline</span>
+      <h2>Your horizon.<br>Your <span class="gold">own course.</span></h2>
+      <p class="lead">Add a private sailing journey to your island escape. Picture quiet anchorages, sparkling water, unhurried afternoons and coastlines seen from a different perspective.</p>
+      <div class="intro-points">
+        <div class="intro-point"><strong>Day charters</strong><span>Explore nearby coves</span></div>
+        <div class="intro-point"><strong>Sunset sailing</strong><span>Golden-hour voyages</span></div>
+        <div class="intro-point"><strong>Island hopping</strong><span>Discover more shores</span></div>
+        <div class="intro-point"><strong>Onboard dining</strong><span>Relaxed meals at sea</span></div>
+      </div>
+      <a href="#contact" class="btn btn-light" style="margin-top:30px">Enquire about sailing ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- 11. PRIVATE DINING -->
+<section class="section" id="dining">
+  <div class="container intro-grid">
+    <div>
+      <span class="eyebrow">A taste of the islands</span>
+      <h2>Beautiful food.<br><span class="gold">Beautifully personal.</span></h2>
+      <p class="lead">Imagine just-caught seafood, fragrant tropical fruits, locally inspired menus and dinner arranged in a place you will never forget.</p>
+      <div style="margin-top:28px;display:grid;gap:16px">
+        <div class="intro-point"><strong>The barefoot beach table</strong><span>A relaxed, candlelit dinner by the water.</span></div>
+        <div class="intro-point"><strong>Your private chef</strong><span>Menus shaped around your tastes and preferences.</span></div>
+        <div class="intro-point"><strong>Local flavours</strong><span>Discover regional ingredients and island traditions.</span></div>
+      </div>
+      <a href="#contact" class="link-arrow" style="margin-top:30px">Plan a dining experience <span>→</span></a>
+    </div>
+    <div style="height:560px;position:relative">
+      <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1100&q=85" alt="Elegant dining setting for a private island dinner" loading="lazy" style="position:absolute;inset:0">
+    </div>
+  </div>
+</section>
+
+<!-- 12. WELLNESS -->
+<section class="section section-sand" id="wellness">
+  <div class="container">
+    <div class="section-heading text-center">
+      <span class="eyebrow">A softer kind of luxury</span>
+      <h2>Come away.<br><span class="gold">Come back to yourself.</span></h2>
+      <p class="lead">Create room for rest, movement and moments that restore your sense of balance.</p>
+    </div>
+    <div class="destination-grid">
+      <article class="destination-card"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=850&q=85" alt="Spa wellness treatment in a peaceful setting" loading="lazy"><div class="destination-info"><span>Restore</span><h3>Island spa rituals</h3><p>Personalised treatments inspired by calm and nature.</p><a href="#contact" class="link-arrow" style="color:white">Discover more →</a></div></article>
+      <article class="destination-card"><img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=850&q=85" alt="Peaceful meditation and mindfulness practice" loading="lazy"><div class="destination-info"><span>Reconnect</span><h3>Mindful mornings</h3><p>Gentle movement, breathwork and time in the open air.</p><a href="#contact" class="link-arrow" style="color:white">Discover more →</a></div></article>
+      <article class="destination-card"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=850&q=85" alt="Fresh, colourful, nourishing food" loading="lazy"><div class="destination-info"><span>Nourish</span><h3>Fresh island living</h3><p>Seasonal flavours and meals designed around your preferences.</p><a href="#contact" class="link-arrow" style="color:white">Discover more →</a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 13. ROMANTIC ESCAPES -->
+<section class="section">
+  <div class="container intro-grid">
+    <div style="height:520px;position:relative">
+      <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1100&q=85" alt="Romantic couple enjoying a peaceful moment together" loading="lazy" style="position:absolute;inset:0">
+    </div>
+    <div>
+      <span class="eyebrow">Just the two of you</span>
+      <h2>A little world<br>for <span class="gold">two.</span></h2>
+      <p class="lead">Celebrate a honeymoon, an anniversary or simply the pleasure of escaping together. Let the details be intimate, thoughtful and unmistakably yours.</p>
+      <div class="intro-points">
+        <div class="intro-point"><strong>Private picnics</strong><span>A quiet beach, beautifully prepared.</span></div>
+        <div class="intro-point"><strong>Sunset moments</strong><span>A table for two by the sea.</span></div>
+        <div class="intro-point"><strong>Couples' wellness</strong><span>Time to unwind together.</span></div>
+        <div class="intro-point"><strong>Special occasions</strong><span>Personal touches for your milestone.</span></div>
+      </div>
+      <a href="#contact" class="btn" style="margin-top:30px">Create a romantic escape ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- 14. FAMILY ADVENTURES -->
+<section class="section section-sand" id="families">
+  <div class="container intro-grid">
+    <div>
+      <span class="eyebrow">Together is a destination</span>
+      <h2>Room for adventure.<br><span class="gold">Space to connect.</span></h2>
+      <p class="lead">From discovering marine life to sharing long beach days, island travel can bring every generation together while leaving room for everyone to find their own rhythm.</p>
+      <div style="margin-top:27px;display:grid;gap:17px">
+        <div class="intro-point"><strong>Gentle ocean discoveries</strong><span>Choose suitable guided activities for your group's ages and abilities.</span></div>
+        <div class="intro-point"><strong>Villas for everyone</strong><span>Explore layouts with shared spaces and private bedrooms.</span></div>
+        <div class="intro-point"><strong>Meaningful moments</strong><span>Plan relaxed meals, island explorations and family celebrations.</span></div>
+      </div>
+      <a href="#contact" class="link-arrow" style="margin-top:30px">Plan a family escape <span>→</span></a>
+    </div>
+    <div style="height:550px;position:relative">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1100&q=85" alt="Wide tropical beach with space to relax and explore" loading="lazy" style="position:absolute;inset:0">
+    </div>
+  </div>
+</section>
+
+<!-- 15. CELEBRATIONS AND EVENTS -->
+<section class="section section-dark" id="celebrations">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Gather somewhere unforgettable</span>
+      <h2>Life's biggest moments<br>deserve a <span class="gold">beautiful setting.</span></h2>
+      <p class="lead">From intimate ceremonies to milestone birthdays and private group retreats, begin with the occasion and build an experience around it.</p>
+    </div>
+    <div class="destination-grid">
+      <article class="destination-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=850&q=85" alt="Elegant outdoor wedding celebration" loading="lazy"><div class="destination-info"><span>Celebrate love</span><h3>Island weddings</h3><p>A meaningful ceremony surrounded by sea, sky and your favourite people.</p><a href="#contact" class="link-arrow" style="color:white">Discuss your celebration →</a></div></article>
+      <article class="destination-card"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=850&q=85" alt="Elegant outdoor dinner celebration with atmospheric lighting" loading="lazy"><div class="destination-info"><span>Mark the moment</span><h3>Milestone occasions</h3><p>Thoughtful details for birthdays, anniversaries and special gatherings.</p><a href="#contact" class="link-arrow" style="color:white">Discuss your celebration →</a></div></article>
+      <article class="destination-card"><img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=850&q=85" alt="Group gathering in a bright event setting" loading="lazy"><div class="destination-info"><span>Reconnect</span><h3>Private group retreats</h3><p>Bring your team, family or friends together away from everyday routines.</p><a href="#contact" class="link-arrow" style="color:white">Discuss your celebration →</a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 16. GALLERY -->
+<section class="section" id="gallery">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Postcards from paradise</span>
+      <h2>A glimpse of <span class="gold">elsewhere.</span></h2>
+      <p class="lead">Explore the colours, coastlines and moments that make island travel feel different. Select any image to view it larger.</p>
+    </div>
+    <div class="gallery-grid">
+      <button class="gallery-item gallery-large" data-full="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1800&q=90" aria-label="Enlarge turquoise lagoon photograph"><img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=85" alt="Turquoise lagoon and tropical villas" loading="lazy"><span>Ocean blues ↗</span></button>
+      <button class="gallery-item" data-full="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1800&q=90" aria-label="Enlarge tropical beach photograph"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=85" alt="Sandy beach and clear ocean" loading="lazy"><span>Quiet shores ↗</span></button>
+      <button class="gallery-item" data-full="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1800&q=90" aria-label="Enlarge luxury villa photograph"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=700&q=85" alt="Luxury villa and pool" loading="lazy"><span>Private living ↗</span></button>
+      <button class="gallery-item" data-full="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1800&q=90" aria-label="Enlarge ocean adventure photograph"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=700&q=85" alt="Tropical ocean adventure" loading="lazy"><span>Into the blue ↗</span></button>
+      <button class="gallery-item" data-full="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=1800&q=90" aria-label="Enlarge yacht photograph"><img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=700&q=85" alt="Yacht on open water" loading="lazy"><span>Open horizons ↗</span></button>
+      <button class="gallery-item" data-full="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1800&q=90" aria-label="Enlarge resort photograph"><img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=700&q=85" alt="Tropical resort pool" loading="lazy"><span>Slow living ↗</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- 17. SAMPLE JOURNEYS -->
+<section class="section section-sand" id="itineraries">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Journeys worth taking</span>
+      <h2>Choose a rhythm.<br><span class="gold">We'll shape the rest.</span></h2>
+      <p class="lead">These sample itineraries are inspiration, not confirmed packages. Travel times, services and prices depend on your chosen destination.</p>
+    </div>
+    <div class="island-grid">
+      <article class="island-card"><div class="island-image"><img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=850&q=85" alt="Sunrise landscape for a peaceful three-day retreat" loading="lazy"><span class="image-tag">03 days</span></div><div class="island-info"><div class="card-location">Rest & reset</div><h3>The Gentle Escape</h3><p>Slow mornings, restorative treatments, a private beach picnic and quiet evenings.</p><div class="card-details"><span>Wellness</span><span>Easy pace</span></div><a href="#contact" class="link-arrow" style="margin-top:18px">Personalise this journey →</a></div></article>
+      <article class="island-card"><div class="island-image"><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=850&q=85" alt="Ocean adventure inspiration for a week-long trip" loading="lazy"><span class="image-tag">07 days</span></div><div class="island-info"><div class="card-location">Explore & discover</div><h3>The Ocean Explorer</h3><p>Island-hopping inspiration with sailing, guided water adventures and local discoveries.</p><div class="card-details"><span>Adventure</span><span>Active pace</span></div><a href="#contact" class="link-arrow" style="margin-top:18px">Personalise this journey →</a></div></article>
+      <article class="island-card"><div class="island-image"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=850&q=85" alt="Romantic setting for a special island celebration" loading="lazy"><span class="image-tag">05 days</span></div><div class="island-info"><div class="card-location">Celebrate together</div><h3>The Private Celebration</h3><p>Thoughtful dining, shared experiences and a beautiful setting for your special occasion.</p><div class="card-details"><span>Celebration</span><span>Personalised</span></div><a href="#contact" class="link-arrow" style="margin-top:18px">Personalise this journey →</a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 18. WHAT MAKES US DIFFERENT -->
+<section class="section" id="difference">
+  <div class="container">
+    <div class="section-heading text-center">
+      <span class="eyebrow">The Isle Privé approach</span>
+      <h2>Luxury is in <span class="gold">the details.</span></h2>
+      <p class="lead">Our concept is built around personal choice, considered travel and the freedom to make a place your own.</p>
+    </div>
+    <div class="value-grid">
+      <article class="value-card"><span class="value-icon">✳</span><h3>Personal, always</h3><p>Start with your interests, pace and priorities rather than a one-size-fits-all itinerary.</p></article>
+      <article class="value-card"><span class="value-icon">⌁</span><h3>Space to breathe</h3><p>Find room for privacy, quiet moments and the pleasures of travelling more slowly.</p></article>
+      <article class="value-card"><span class="value-icon">◇</span><h3>Locally connected</h3><p>Look for experiences that celebrate local culture, flavours and island character.</p></article>
+      <article class="value-card"><span class="value-icon">✧</span><h3>Thoughtful details</h3><p>Bring the little preferences together into a journey that feels distinctly yours.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- 19. OUR APPROACH TO RESPONSIBLE TRAVEL -->
+<section class="section section-sand" id="responsible-travel">
+  <div class="container intro-grid">
+    <div style="height:530px;position:relative">
+      <img src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1000&q=85" alt="Lush tropical greenery and natural forest environment" loading="lazy" style="position:absolute;inset:0">
+    </div>
+    <div>
+      <span class="eyebrow">Travel with care</span>
+      <h2>Beautiful places<br>deserve <span class="gold">care.</span></h2>
+      <p class="lead">Island environments are precious. We encourage travellers to learn about the places they visit and to consider how their choices affect local communities and fragile ecosystems.</p>
+      <div style="display:grid;gap:18px;margin-top:28px">
+        <div class="intro-point"><strong>Respect marine life</strong><span>Follow local guidance around reefs and wildlife; never disturb animals.</span></div>
+        <div class="intro-point"><strong>Support local makers</strong><span>Explore locally owned businesses, guides and craftspeople.</span></div>
+        <div class="intro-point"><strong>Reduce your footprint</strong><span>Consider waste, water use and lower-impact activities where possible.</span></div>
+      </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:23px">These are travel principles, not a claim that any particular property has been independently certified.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 20. THE PLANNING PROCESS -->
+<section class="section" id="planning">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Simple by design</span>
+      <h2>From first thought<br>to <span class="gold">faraway.</span></h2>
+      <p class="lead">A clear, thoughtful process to help turn your island inspiration into a practical travel plan.</p>
+    </div>
+    <div class="steps-grid">
+      <article class="step-card"><span>01</span><h3>Tell us what matters</h3><p>Share your dates, group size, preferred pace, interests and approximate budget.</p></article>
+      <article class="step-card"><span>02</span><h3>Explore the possibilities</h3><p>Compare suitable regions, accommodation styles and experience ideas.</p></article>
+      <article class="step-card"><span>03</span><h3>Refine the details</h3><p>Review travel logistics, special requests, inclusions and current supplier terms.</p></article>
+      <article class="step-card"><span>04</span><h3>Prepare to escape</h3><p>Confirm arrangements directly with the relevant travel provider before departure.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- 21. SAMPLE PRICING -->
+<section class="section section-dark" id="pricing">
+  <div class="container">
+    <div class="section-heading text-center">
+      <span class="eyebrow">Plan around your priorities</span>
+      <h2>Considered escapes.<br><span class="gold">Different ways to stay.</span></h2>
+      <p class="lead">Illustrative budget bands for website demonstration only. These are not verified offers, current quotes or guaranteed nightly rates.</p>
+    </div>
+    <div class="pricing-grid">
+      <article class="price-card"><span class="price-label">The intimate escape</span><h3>Island Hideaway</h3><div class="price-amount">$500–$1,500 <small>/ night</small></div><p>Illustrative accommodation budget for a more intimate island stay.</p><ul><li>✓ Boutique or villa-style stay</li><li>✓ Destination inspiration</li><li>✓ Suggested experience ideas</li><li>✓ Personal preference checklist</li></ul><a href="#contact" class="btn btn-outline">Discuss your budget</a></article>
+      <article class="price-card price-featured"><span class="price-label">A little more extraordinary</span><h3>Private Island Living</h3><div class="price-amount">$1,500–$4,000 <small>/ night</small></div><p>Illustrative budget band for premium villas and distinctive resort experiences.</p><ul><li>✓ Private accommodation concepts</li><li>✓ Tailored itinerary ideas</li><li>✓ Dining and wellness options</li><li>✓ Special occasion planning</li></ul><a href="#contact" class="btn btn-light">Discuss your budget</a></article>
+      <article class="price-card"><span class="price-label">The grand escape</span><h3>Exclusive Estate</h3><div class="price-amount">$4,000+ <small>/ night</small></div><p>Illustrative high-end budget band for larger estates and bespoke travel concepts.</p><ul><li>✓ Multi-bedroom estate concepts</li><li>✓ Private group experiences</li><li>✓ Yacht and dining inspiration</li><li>✓ Complex itinerary planning</li></ul><a href="#contact" class="btn btn-outline">Discuss your budget</a></article>
+    </div>
+    <p style="font-size:11px;color:rgba(255,255,255,.58);text-align:center;margin-top:24px">Actual costs vary by destination, season, property, group size, taxes, transfers and inclusions. Flights and other extras may be additional.</p>
+  </div>
+</section>
+
+<!-- 22. TRAVEL INSPIRATION -->
+<section class="section" id="journal">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">The island journal</span>
+      <h2>Ideas for your<br><span class="gold">next escape.</span></h2>
+      <p class="lead">A little inspiration for choosing a destination, packing thoughtfully and making the most of your time away.</p>
+    </div>
+    <div class="destination-grid">
+      <article class="journal-card"><img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=800&q=85" alt="Ocean waves along a tropical coastline" loading="lazy"><div class="journal-content"><span>DESTINATION GUIDE · 5 MIN READ</span><h3>Finding your ideal island region</h3><p>Compare the feel of different coastlines, the activities you love and the journey required to reach them.</p><a href="#faq" class="link-arrow">Read travel tips <span>→</span></a></div></article>
+      <article class="journal-card"><img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=800&q=85" alt="Palm-fringed tropical shore" loading="lazy"><div class="journal-content"><span>TRAVEL NOTES · 4 MIN READ</span><h3>The art of travelling slowly</h3><p>Why leaving a little space in your itinerary can make a trip feel more personal.</p><a href="#faq" class="link-arrow">Read travel tips <span>→</span></a></div></article>
+      <article class="journal-card"><img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=800&q=85" alt="Warm light over a peaceful horizon" loading="lazy"><div class="journal-content"><span>PLANNING NOTES · 6 MIN READ</span><h3>Planning a special island occasion</h3><p>Key questions to ask about guest needs, access, weather and event arrangements.</p><a href="#faq" class="link-arrow">Read travel tips <span>→</span></a></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 23. TESTIMONIAL-STYLE INSPIRATION -->
+<section class="section section-sand" id="stories">
+  <div class="container text-center">
+    <span class="eyebrow">The feeling we seek</span>
+    <div class="quote-mark">“</div>
+    <h2 class="quote-text">The best journeys leave you with more than photographs. They leave you with a feeling you want to return to.</h2>
+    <p class="quote-credit">THE ISLE PRIVÉ PHILOSOPHY</p>
+    <p style="font-size:11px;color:var(--muted);margin-top:16px">An original brand statement, not a customer testimonial.</p>
+  </div>
+</section>
+
+<!-- 24. ISLAND PHOTO FEATURE -->
+<section class="photo-banner">
+  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=90" alt="Expansive tropical beach and bright blue sea" loading="lazy">
+  <div class="photo-banner-overlay"></div>
+  <div class="photo-banner-content">
+    <span class="eyebrow">Somewhere beyond the everyday</span>
+    <h2>Make room<br>for <em>wonder.</em></h2>
+    <a href="#contact" class="btn btn-light">Begin your journey ↗</a>
+  </div>
+</section><!-- =========================================================
+PART 3/3 — FINAL SECTIONS, INTERACTIONS & CLOSING TAGS
+Paste directly after PART 2 in the same index.html file.
+========================================================= -->
+
+<style>
+/* ADDITIONAL PREMIUM COMPONENTS */
+.day-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.value-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.value-card{padding:30px 23px;background:white;border:1px solid var(--line);transition:transform .25s,box-shadow .25s}
+.value-card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.value-icon{display:grid;place-items:center;width:47px;height:47px;border:1px solid #c8a76b;color:var(--ocean);font-size:23px;margin-bottom:22px}
+.value-card h3{font-size:23px;margin-bottom:12px}
+.value-card p,.step-card p{font-size:12px;color:var(--muted);line-height:1.9}
+.steps-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.step-card{padding:25px 20px;border-top:1px solid var(--gold);background:white}
+.step-card>span{font-family:var(--serif);font-size:39px;color:var(--gold);display:block;margin-bottom:20px}
+.step-card h3{font-size:23px;margin-bottom:13px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.price-card{padding:33px 26px;border:1px solid rgba(255,255,255,.19);display:flex;flex-direction:column}
+.price-featured{background:rgba(255,255,255,.08);border-color:var(--gold);transform:translateY(-8px)}
+.price-label{font-size:9px;letter-spacing:1.7px;text-transform:uppercase;color:var(--aqua)}
+.price-card h3{font-size:27px;margin:14px 0}
+.price-amount{font-family:var(--serif);font-size:25px;color:var(--gold);margin-bottom:16px}
+.price-amount small{font:10px var(--sans);color:rgba(255,255,255,.65)}
+.price-card>p{font-size:12px;color:rgba(255,255,255,.65);line-height:1.9;min-height:65px}
+.price-card ul{margin:22px 0 27px;flex:1}
+.price-card li{font-size:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.84)}
+.price-card .btn{width:100%;font-size:10px}
+.journal-card{background:white;border:1px solid var(--line)}
+.journal-card>img{height:235px}
+.journal-content{padding:25px}
+.journal-content>span{font-size:9px;letter-spacing:1.4px;color:var(--ocean)}
+.journal-content h3{font-size:25px;margin:13px 0}
+.journal-content p{font-size:12px;color:var(--muted);line-height:1.9;margin-bottom:20px}
+.quote-mark{font-family:var(--serif);font-size:90px;line-height:1;color:var(--gold);margin:22px 0 0}
+.quote-text{max-width:900px;margin:0 auto;font-size:clamp(29px,4.5vw,52px);line-height:1.3}
+.quote-credit{font-size:10px;letter-spacing:2px;margin-top:27px;color:var(--ocean)}
+.photo-banner{height:550px;position:relative;isolation:isolate;display:flex;align-items:center;color:white}
+.photo-banner>img,.photo-banner-overlay{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.photo-banner-overlay{z-index:-1;background:linear-gradient(90deg,rgba(3,34,31,.75),rgba(3,34,31,.08))}
+.photo-banner-content{width:min(var(--container),calc(100% - 48px));margin:auto}
+.photo-banner h2{font-size:clamp(48px,7vw,82px);margin:12px 0 28px}
+.photo-banner h2 em{color:#e4c891;font-weight:400}
+.gallery-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;grid-template-rows:220px 220px;gap:13px}
+.gallery-item{position:relative;min-width:0;overflow:hidden;border:0;text-align:left;background:#dce7df}
+.gallery-item img{transition:transform .5s}
+.gallery-item:hover img{transform:scale(1.06)}
+.gallery-item span{position:absolute;left:17px;bottom:15px;background:rgba(5,43,39,.85);padding:9px 12px;color:white;font-size:10px;letter-spacing:1px}
+.gallery-large{grid-row:span 2}
+.lightbox{position:fixed;z-index:2000;inset:0;background:rgba(1,16,15,.95);display:none;align-items:center;justify-content:center;padding:35px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:1100px;max-height:85vh;width:auto;height:auto;object-fit:contain}
+.lightbox-close{position:absolute;top:20px;right:25px;color:white;background:transparent;border:1px solid #ffffff66;width:45px;height:45px;font-size:25px}
+.lightbox-caption{position:absolute;bottom:12px;color:#fff;font-size:11px}
+.section-photo-strip{display:grid;grid-template-columns:repeat(4,1fr);height:230px;overflow:hidden}
+.section-photo-strip img{min-width:0}
+.faq-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:75px;align-items:start}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-question{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;text-align:left;border:0;background:transparent;padding:22px 0;color:var(--ink);font-family:var(--serif);font-size:20px}
+.faq-question span:last-child{font:20px var(--sans);color:var(--ocean);transition:transform .2s}
+.faq-question[aria-expanded="true"] span:last-child{transform:rotate(45deg)}
+.faq-answer{padding:0 25px 22px 0;color:var(--muted);font-size:13px;line-height:1.9}
+.faq-answer[hidden]{display:none}
+.newsletter{background:#e5eee7;padding:54px 0}
+.newsletter-grid{display:flex;justify-content:space-between;align-items:center;gap:35px}
+.newsletter h2{font-size:35px}
+.newsletter p{font-size:12px;color:var(--muted);margin-top:10px}
+.newsletter-form{display:flex;gap:8px;max-width:500px;width:100%}
+.newsletter-form input{min-width:0;flex:1;padding:15px;border:1px solid var(--line);background:white;outline-color:var(--ocean);font-size:12px}
+.site-footer{background:#052b28;color:white;padding:75px 0 25px}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding-bottom:55px}
+.footer-brand-copy{max-width:290px;font-size:12px;color:rgba(255,255,255,.62);line-height:1.9;margin-top:20px}
+.footer-column h4{font:700 10px var(--sans);letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);margin-bottom:21px}
+.footer-column a{display:block;font-size:12px;color:rgba(255,255,255,.68);margin:12px 0;transition:color .2s}
+.footer-column a:hover{color:white}
+.footer-bottom{border-top:1px solid #ffffff21;padding-top:22px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:10px;color:rgba(255,255,255,.55)}
+.footer-bottom a{text-decoration:underline}
+.back-top{position:fixed;bottom:22px;right:22px;z-index:900;width:45px;height:45px;background:var(--forest);color:white;border:1px solid #ffffff55;font-size:20px;opacity:0;pointer-events:none;transition:opacity .2s}
+.back-top.visible{opacity:1;pointer-events:auto}
+.toast{position:fixed;z-index:2100;left:50%;bottom:25px;transform:translate(-50%,20px);background:var(--deep);color:white;padding:14px 23px;font-size:12px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:calc(100% - 30px)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.form-field{display:flex;flex-direction:column;gap:8px}
+.form-field.full{grid-column:1/-1}
+.form-field label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.form-field input,.form-field select,.form-field textarea{width:100%;padding:14px;border:1px solid var(--line);background:white;color:var(--ink);outline-color:var(--ocean);border-radius:0;font-size:13px}
+.form-field textarea{min-height:135px;resize:vertical}
+.form-note{font-size:11px;color:var(--muted);line-height:1.8}
+.empty-state{grid-column:1/-1;padding:35px;text-align:center;color:var(--muted)}
+@media(max-width:1000px){
+ .day-grid,.steps-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .value-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .gallery-grid{grid-template-rows:200px 200px}
+ .pricing-grid{gap:10px}.price-card{padding:24px 17px}.price-amount{font-size:20px}
+ .faq-layout{gap:35px}
+ .footer-grid{grid-template-columns:1.3fr 1fr 1fr}
+ .footer-grid>.footer-column:last-child{grid-column:2/-1}
+}
+@media(max-width:720px){
+ .day-grid{grid-template-columns:1fr 1fr;gap:24px 14px}
+ .day-grid img{height:155px!important}
+ .value-grid{grid-template-columns:1fr 1fr;gap:10px}
+ .value-card{padding:22px 15px}.value-card h3{font-size:20px}
+ .steps-grid{grid-template-columns:1fr 1fr;gap:12px}
+ .step-card{padding:20px 15px}.step-card h3{font-size:20px}
+ .pricing-grid{grid-template-columns:1fr;gap:16px}
+ .price-featured{transform:none}
+ .price-card>p{min-height:0}
+ .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:190px 160px 160px;gap:8px}
+ .gallery-large{grid-row:auto;grid-column:span 2}
+ .gallery-large img{object-position:center 52%}
+ .gallery-item span{font-size:9px;left:8px;bottom:8px;padding:7px}
+ .photo-banner{height:460px}
+ .faq-layout{grid-template-columns:1fr;gap:15px}
+ .faq-question{font-size:18px}
+ .newsletter-grid{display:block}
+ .newsletter-form{margin-top:23px}
+ .newsletter h2{font-size:30px}
+ .footer-grid{grid-template-columns:1fr 1fr;gap:30px 20px}
+ .footer-grid>.footer-column:last-child{grid-column:auto}
+ .footer-brand{grid-column:1/-1}
+ .footer-bottom{font-size:9px}
+ .form-grid{grid-template-columns:1fr}
+ .form-field.full{grid-column:auto}
+}
+@media(max-width:390px){
+ .day-grid{grid-template-columns:1fr}
+ .day-grid img{height:210px!important}
+ .value-grid{grid-template-columns:1fr}
+ .steps-grid{grid-template-columns:1fr}
+ .footer-grid{grid-template-columns:1fr 1fr}
+ .hero-meta{gap:13px}
+ .hero-meta strong{font-size:19px}
+}
+</style>
+
+<!-- 25. TRAVEL CHECKLIST -->
+<section class="section" id="checklist">
+  <div class="container intro-grid">
+    <div>
+      <span class="eyebrow">Travel well prepared</span>
+      <h2>Your island<br><span class="gold">travel checklist.</span></h2>
+      <p class="lead">Use this interactive checklist to prepare for a tropical escape. Your selections remain in this page only and are not saved to an account.</p>
+      <div id="packingList" style="margin-top:25px;display:grid;gap:12px">
+        <label class="check-item"><input type="checkbox"> Passport and any required visas</label>
+        <label class="check-item"><input type="checkbox"> Travel insurance and emergency details</label>
+        <label class="check-item"><input type="checkbox"> Swimwear and light clothing</label>
+        <label class="check-item"><input type="checkbox"> Sun protection and a reusable water bottle</label>
+        <label class="check-item"><input type="checkbox"> Suitable footwear for excursions</label>
+        <label class="check-item"><input type="checkbox"> Necessary medication and prescriptions</label>
+        <label class="check-item"><input type="checkbox"> Confirmed transfers and accommodation details</label>
+        <label class="check-item"><input type="checkbox"> Chargers, adapters and camera</label>
+      </div>
+      <p id="checklistProgress" style="font-size:12px;color:var(--ocean);margin-top:20px">0 of 8 essentials checked</p>
+      <button type="button" id="resetChecklist" class="btn btn-outline-dark" style="margin-top:14px">Reset checklist</button>
+    </div>
+    <div style="height:540px;position:relative">
+      <img src="https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1000&q=85" alt="Palm trees beside a peaceful tropical beach" loading="lazy" style="position:absolute;inset:0">
+    </div>
+  </div>
+</section>
+
+<!-- 26. DESTINATION COMPARISON TOOL -->
+<section class="section section-sand" id="compare">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Choose your island mood</span>
+      <h2>What does your<br><span class="gold">paradise look like?</span></h2>
+      <p class="lead">Compare broad travel styles to begin your search. These descriptions are general inspiration, not a forecast or guarantee for any specific property.</p>
+    </div>
+    <div class="compare-panel">
+      <div class="form-grid">
+        <div class="form-field"><label for="priority">Your top priority</label><select id="priority"><option value="relax">Peace and relaxation</option><option value="adventure">Ocean adventures</option><option value="culture">Local culture and food</option><option value="romance">Romantic privacy</option><option value="family">Family-friendly experiences</option></select></div>
+        <div class="form-field"><label for="climate">Preferred setting</label><select id="climate"><option value="lagoon">Calm lagoon and beaches</option><option value="nature">Lush nature and wild coast</option><option value="culture">Lively coastal culture</option><option value="secluded">Remote and secluded</option></select></div>
+      </div>
+      <button id="compareButton" class="btn" style="margin-top:20px">Find my travel style ↗</button>
+      <div id="compareResult" class="compare-result" aria-live="polite" style="margin-top:25px" hidden></div>
+    </div>
+  </div>
+</section>
+
+<!-- 27. FREQUENTLY ASKED QUESTIONS -->
+<section class="section" id="faq">
+  <div class="container faq-layout">
+    <div>
+      <span class="eyebrow">A few useful answers</span>
+      <h2>Before you<br><span class="gold">disappear.</span></h2>
+      <p class="lead">A little clarity to help you plan a more relaxed island escape.</p>
+      <a href="#contact" class="btn" style="margin-top:25px">Ask us a question ↗</a>
+    </div>
+    <div class="faq-list">
+      <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>What is a private island experience?</span><span>+</span></button><div class="faq-answer" hidden>It can mean staying on a privately operated island, booking an exclusive villa or arranging private activities in a secluded setting. The level of exclusivity varies by property and package.</div></article>
+      <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>How far in advance should I plan?</span><span>+</span></button><div class="faq-answer" hidden>For remote islands, peak-season travel, weddings and larger groups, starting several months ahead is sensible. Availability varies, so confirm dates and arrangements with the actual provider.</div></article>
+      <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Are transfers included in the stay?</span><span>+</span></button><div class="faq-answer" hidden>Not necessarily. Boat transfers, seaplanes, domestic flights and airport pickups depend on the property and booking terms. Ask for a full breakdown before paying.</div></article>
+      <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Can I plan a honeymoon or wedding?</span><span>+</span></button><div class="faq-answer" hidden>Yes, these are suitable planning themes. Confirm venue permissions, event capacity, weather contingencies, vendor availability and any local legal requirements with the relevant providers.</div></article>
+      <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>What should I budget for?</span><span>+</span></button><div class="faq-answer" hidden>Consider accommodation, taxes, meals, transfers, flights, activities, insurance and any private services. The prices shown on this demonstration website are illustrative only.</div></article>
+      <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Can I travel with children?</span><span>+</span></button><div class="faq-answer" hidden>Some island properties are suitable for families and others may have age restrictions. Check water safety, medical access, travel times, child facilities and supervision requirements before booking.</div></article>
+      <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>When is the best time to visit?</span><span>+</span></button><div class="faq-answer" hidden>It depends on the region, seasonal rainfall, ocean conditions and cyclone or hurricane seasons. Research destination-specific conditions for your dates and check current travel advisories.</div></article>
+      <article class="faq-item"><button class="faq-question" aria-expanded="false"><span>Can I book directly on this website?</span><span>+</span></button><div class="faq-answer" hidden>No. This is a front-end website demonstration. Enquiry forms provide a local demo confirmation only and do not contact a travel agent, reserve accommodation or process payments.</div></article>
+    </div>
+  </div>
+</section>
+
+<!-- 28. ENQUIRY FORM -->
+<section class="section section-sand" id="contact">
+  <div class="container intro-grid">
+    <div>
+      <span class="eyebrow">Your journey starts here</span>
+      <h2>Tell us about<br><span class="gold">your somewhere.</span></h2>
+      <p class="lead">Share the outline of your ideal escape. This sample form demonstrates the enquiry experience locally; it does not send your details to a company or booking system.</p>
+      <div style="margin-top:30px;display:grid;gap:19px">
+        <div class="intro-point"><strong>Have a destination in mind?</strong><span>Tell us where you would love to go.</span></div>
+        <div class="intro-point"><strong>Still dreaming?</strong><span>Start with the feeling you want your trip to have.</span></div>
+        <div class="intro-point"><strong>Planning something special?</strong><span>Include a celebration, group trip or personal milestone.</span></div>
+      </div>
+      <div style="margin-top:25px;padding:18px;border:1px solid var(--line);font-size:11px;color:var(--muted);line-height:1.8">DEMO NOTICE: No real booking, payment, email delivery, database storage or supplier contact is configured.</div>
+    </div>
+    <div style="background:white;padding:clamp(22px,4vw,40px);box-shadow:var(--shadow)">
+      <h3 style="font-size:29px;margin-bottom:9px">Design your escape</h3>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:25px">Tell us a little about your plans.</p>
+      <form id="enquiryForm">
+        <div class="form-grid">
+          <div class="form-field"><label for="fullName">Your name *</label><input id="fullName" name="name" required maxlength="100" autocomplete="name" placeholder="Full name"></div>
+          <div class="form-field"><label for="emailAddress">Email address *</label><input id="emailAddress" name="email" type="email" required maxlength="160" autocomplete="email" placeholder="you@example.com"></div>
+          <div class="form-field"><label for="destination">Dream destination</label><select id="destination" name="destination"><option>I'm open to ideas</option><option>Indian Ocean</option><option>South Pacific</option><option>Caribbean</option><option>Southeast Asia</option><option>Somewhere else</option></select></div>
+          <div class="form-field"><label for="travellers">Group size</label><select id="travellers" name="travellers"><option>2 guests</option><option>1 guest</option><option>3–4 guests</option><option>5–8 guests</option><option>9+ guests</option></select></div>
+          <div class="form-field"><label for="startDate">Preferred arrival</label><input id="startDate" name="date" type="date"></div>
+          <div class="form-field"><label for="duration">Trip duration</label><select id="duration" name="duration"><option>Flexible</option><option>1–3 nights</option><option>4–6 nights</option><option>7–10 nights</option><option>11+ nights</option></select></div>
+          <div class="form-field full"><label for="budget">Approximate nightly budget</label><select id="budget" name="budget"><option>Prefer to discuss</option><option>Under $500</option><option>$500–$1,500</option><option>$1,500–$4,000</option><option>$4,000+</option></select></div>
+          <div class="form-field full"><label for="tripMessage">Describe your ideal escape</label><textarea id="tripMessage" name="message" maxlength="2000" placeholder="Your interests, occasion, preferred experiences and anything else we should know..."></textarea></div>
+          <div class="form-field full"><button type="submit" class="btn" style="width:100%">Preview my enquiry ↗</button></div>
+        </div>
+        <p class="form-note" style="margin-top:15px">By submitting, you will see a demonstration confirmation on this page. Your information is not transmitted or saved.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- 29. NEWSLETTER DEMO -->
+<section class="newsletter" id="newsletter">
+  <div class="container newsletter-grid">
+    <div><span class="eyebrow">A little inspiration, occasionally</span><h2>Letters from paradise.</h2><p>Discover island ideas, travel inspiration and places worth dreaming about.</p></div>
+    <form class="newsletter-form" id="newsletterForm"><label for="newsletterEmail" style="position:absolute;left:-9999px">Email address</label><input id="newsletterEmail" type="email" required maxlength="160" placeholder="Your email address"><button type="submit" class="btn">Join the list ↗</button></form>
+  </div>
+  <div class="container"><p class="form-note" style="margin-top:12px">Demo only. No email address is transmitted, stored or added to a mailing list.</p></div>
+</section>
+
+<!-- 30. FINAL CALL TO ACTION -->
+<section class="section-dark" style="padding:82px 0">
+  <div class="container text-center">
+    <span class="eyebrow">The extraordinary is out there</span>
+    <h2 style="max-width:800px;margin:0 auto">The only question is,<br><span class="gold">where will you wake up?</span></h2>
+    <p class="lead" style="margin:22px auto 29px">Start with a dream. Find the island that feels like yours.</p>
+    <a href="#contact" class="btn btn-light">Start planning your escape ↗</a>
+  </div>
+</section>
+
+<!-- 31. FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#home" style="color:white"><span class="brand-mark">I</span><span><span class="brand-name">ISLE PRIVÉ</span><span class="brand-sub">Beyond the ordinary</span></span></a>
+        <p class="footer-brand-copy">A world of private island inspiration, extraordinary escapes and thoughtfully imagined travel experiences. Find your own horizon.</p>
+        <p style="font-size:10px;color:var(--gold);margin-top:18px;letter-spacing:1px">YOUR WORLD. YOUR ISLAND. YOUR WAY.</p>
+      </div>
+      <div class="footer-column"><h4>Discover</h4><a href="#destinations">Destinations</a><a href="#islands">Island collection</a><a href="#villas">Private villas</a><a href="#experiences">Experiences</a><a href="#yachting">Yacht journeys</a><a href="#gallery">Photo gallery</a></div>
+      <
